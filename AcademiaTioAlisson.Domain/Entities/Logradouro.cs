@@ -1,25 +1,64 @@
 ﻿// Alisson Cordova De Assis
+using AcademiaTioAlisson.Domain.Common;
+using AcademiaTioAlisson.Domain.Services;
 using AcademiaTioAlisson.Domain.ValueObjects;
-namespace AcademiaTioAlisson.Domain.Entities
-{
-    public class Logradouro : Entity
-    {
-        public Cep Cep { get; protected set; }
-        public string Pais { get; protected set; }
-        public string Estado { get; protected set; }
-        public string Cidade { get; protected set; }
-        public string Bairro { get; protected set; }
-        public string NomeLogradouro { get; protected set; }
 
-        public Logradouro(int id, Cep cep, string pais, string estado, string cidade, string bairro, string nomeLogradouro)
-            : base(id)
-        {
-            Cep = cep;
-            Pais = pais;
-            Estado = estado;
-            Cidade = cidade;
-            Bairro = bairro;
-            NomeLogradouro = nomeLogradouro;
-        }
+namespace AcademiaTioAlisson.Domain.Entities;
+
+public sealed class Logradouro : Entity
+{
+    public ValueObjects.Cep Cep { get; }
+    public string Nome { get; }
+    public string Bairro { get; }
+    public string Cidade { get; }
+    public string Estado { get; }
+    public string Pais { get; }
+
+    private Logradouro(int id, ValueObjects.Cep cep, string nome, string bairro, string cidade, string estado, string pais) : base(id)
+    {
+        Cep = cep;
+        Nome = nome;
+        Bairro = bairro;
+        Cidade = cidade;
+        Estado = estado;
+        Pais = pais;
+    }
+
+    public static Result<Logradouro> Criar(int id, string cep, string nome, string bairro, string cidade, string estado, string pais)
+    {
+        var notifications = new List<Notification>();
+
+        var cepResult = ValueObjects.Cep.Criar(cep);
+        if (cepResult.IsFailure) notifications.AddRange(cepResult.Notifications);
+
+        if (NormalizadoService.TextoVazioOuNulo(nome))
+            notifications.Add(new Notification("Nome", "NOME_OBRIGATORIO"));
+        else
+            nome = NormalizadoService.LimparEspacos(nome);
+
+        if (NormalizadoService.TextoVazioOuNulo(bairro))
+            notifications.Add(new Notification("Bairro", "BAIRRO_OBRIGATORIO"));
+        else
+            bairro = NormalizadoService.LimparEspacos(bairro);
+
+        if (NormalizadoService.TextoVazioOuNulo(cidade))
+            notifications.Add(new Notification("Cidade", "CIDADE_OBRIGATORIO"));
+        else
+            cidade = NormalizadoService.LimparEspacos(cidade);
+
+        if (NormalizadoService.TextoVazioOuNulo(estado))
+            notifications.Add(new Notification("Estado", "ESTADO_OBRIGATORIO"));
+        else
+            estado = NormalizadoService.ParaMaiusculo(NormalizadoService.LimparTodosEspacos(estado));
+
+        if (NormalizadoService.TextoVazioOuNulo(pais))
+            notifications.Add(new Notification("Pais", "PAIS_OBRIGATORIO"));
+        else
+            pais = NormalizadoService.LimparEspacos(pais);
+
+        if (notifications.Count != 0)
+            return Result<Logradouro>.Failure(notifications);
+
+        return Result<Logradouro>.Success(new Logradouro(id, cepResult.Value!, nome, bairro, cidade, estado, pais));
     }
 }

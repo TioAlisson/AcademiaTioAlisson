@@ -1,5 +1,7 @@
 ﻿// Alisson Cordova De Assis
 
+using AcademiaTioAlisson.Domain.Exceptions;
+
 namespace AcademiaTioAlisson.Domain.Entities
 {
     public abstract class Entity
