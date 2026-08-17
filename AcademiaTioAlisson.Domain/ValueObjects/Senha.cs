@@ -1,5 +1,4 @@
 ﻿// Alisson Cordova De Assis
-
 using AcademiaTioAlisson.Domain.Common;
 using AcademiaTioAlisson.Domain.Services;
 
@@ -14,15 +13,16 @@ public record Senha
         Valor = valor;
     }
 
-    public static Result<Senha> Criar(string? valor)
+    public static Result<Senha> Criar(string valor)
     {
         if (NormalizadoService.TextoVazioOuNulo(valor))
-            return Result<Senha>.Failure("Senha", "SENHA_OBRIGATORIA");
+            return Result<Senha>.Failure("Senha", "SENHA_OBRIGATORIO");
 
-        if (valor!.Length < 6)
-            return Result<Senha>.Failure("Senha", "SENHA_TAMANHO_MINIMO");
+        var textoLimpo = NormalizadoService.LimparEspacos(valor);
+        if (textoLimpo.Length < 6 || !textoLimpo.Any(char.IsUpper))
+            return Result<Senha>.Failure("Senha", "SENHA_FORMATO");
 
-        return Result<Senha>.Success(new Senha(valor));
+        return Result<Senha>.Success(new Senha(textoLimpo));
     }
 
     public override string ToString() => Valor;

@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="AcademiaTioAlisson.Domain.Tests/AcademiaTioAlisson.Domain.Tests.csproj" Id="c7915013-0289-496d-92a9-c102affac2a7" />
   <Project Path="AcademiaTioAlisson.Domain/AcademiaTioAlisson.Domain.csproj" />
 </Solution>
