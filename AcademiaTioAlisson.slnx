@@ -1,4 +1,8 @@
 <Solution>
-  <Project Path="AcademiaTioAlisson.Domain.Tests/AcademiaTioAlisson.Domain.Tests.csproj" Id="c7915013-0289-496d-92a9-c102affac2a7" />
+  <Project Path="AcademiaTioAlisson.Domain.Tests/AcademiaTioAlisson.Domain.Tests.csproj" Id="c7915013-0289-496d-92a9-c102affac2a7">
+    <BuildDependency Project="AcademiaTioAlisson.Infrastructure/AcademiaTioAlisson.Infrastructure.csproj" />
+  </Project>
   <Project Path="AcademiaTioAlisson.Domain/AcademiaTioAlisson.Domain.csproj" />
+  <Project Path="AcademiaTioAlisson.Infrastructure.Tests/AcademiaTioAlisson.Infrastructure.Tests.csproj" Id="ce04f566-b57d-4294-a021-8581e00396d6" />
+  <Project Path="AcademiaTioAlisson.Infrastructure/AcademiaTioAlisson.Infrastructure.csproj" Id="81faea89-be0d-49f8-860d-ac793041191c" />
 </Solution>
