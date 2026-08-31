@@ -9,7 +9,7 @@ namespace AcademiaTioAlisson.Infrastructure.Tests;
 public abstract class TestBase
 {
     // Alterne o SGBD alvo dos testes trocando a constante abaixo (Sqlite, SqlServer ou MySql)
-    protected const DatabaseType SelectedDatabaseType = DatabaseType.SqlServer;
+    protected const DatabaseType SelectedDatabaseType = DatabaseType.Sqlite;
 
     protected string ConnectionString { get; }
     protected DatabaseType DatabaseType { get; }
