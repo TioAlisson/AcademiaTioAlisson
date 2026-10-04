@@ -6,4 +6,7 @@
   <Project Path="AcademiaTioAlisson.Domain/AcademiaTioAlisson.Domain.csproj" />
   <Project Path="AcademiaTioAlisson.Infrastructure.Tests/AcademiaTioAlisson.Infrastructure.Tests.csproj" Id="ce04f566-b57d-4294-a021-8581e00396d6" />
   <Project Path="AcademiaTioAlisson.Infrastructure/AcademiaTioAlisson.Infrastructure.csproj" Id="81faea89-be0d-49f8-860d-ac793041191c" />
+  <Project Path="AcademiaTioAlisson.Presentation.AppMaui/AcademiaTioAlisson.Presentation.AppMaui.csproj" Id="fed4b451-2484-4622-b981-557969a8583b">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>
